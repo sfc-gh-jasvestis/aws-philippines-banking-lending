@@ -9,7 +9,6 @@ Philippine digital lending exploded in 2023 — growing 45% as GCash, Maya, and 
 ```mermaid
 flowchart LR
     KIN[Kinesis] --> SPS[Snowpipe Streaming]
-    SP --> RAW[RAW Tables]
     SPS --> RAW
     RAW --> DT[Dynamic Tables]
     DT --> ML[ML Functions]
