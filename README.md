@@ -116,10 +116,10 @@ Run all scripts including AWS integration. Deploy QuickSight dashboard from `qui
 ## Business Impact
 
 Industry research and Snowflake customer outcomes:
-- **Philippine digital lending grew 45% in 2023 driven by fintech and online banks** — [BSP](https://www.bsp.gov.ph/Statistics/banking.aspx)
+- **Philippine digital lending grew 45% in 2023 driven by fintech and online banks** — [BSP](https://www.bsp.gov.ph/SitePages/Statistics/Statistics.aspx)
 - **AI-powered credit scoring improves lending decisions by 20-30% vs traditional scorecards** — [McKinsey Banking](https://www.mckinsey.com/industries/financial-services/our-insights)
 - **Real-time data integration reduces time-to-decision by 70-90%** — [Accenture Banking](https://www.accenture.com/us-en/insights/banking)
-- **Philippine banking NPL ratio was 3.4% in 2023 — digital lenders averaging 4-6%** — [BSP](https://www.bsp.gov.ph/Statistics/banking.aspx)
+- **Philippine banking NPL ratio was 3.4% in 2023 — digital lenders averaging 4-6%** — [BSP](https://www.bsp.gov.ph/SitePages/Statistics/Statistics.aspx)
 - **Western Union** (Snowflake customer): processes 1B+ cross-border transactions on Snowflake with real-time compliance and fraud detection -- [snowflake.com/customers/western-union](https://www.snowflake.com/en/customers/all-customers/case-study/western-union/)
 
 ## Key Demo Numbers
