@@ -1,108 +1,81 @@
-# Demo Script: Digital Lending & Credit Scoring Platform
-## ~4-Minute Recorded Walkthrough
-**Format**: Screen recording with voiceover
-**Target**: Customer meeting / booth loop / social share
-**Narrative**: "Snowflake consolidates applicant data into Dynamic Table 360 views, scores credit risk with ML.CLASSIFICATION replacing SageMaker, and provides end-to-end lending intelligence from application to disbursement"
-**Demo Mode**: Open app with `?demo=true` for presenter notes
+# Digital Lending & Credit Scoring Platform
 
----
+**Philippines - Banking & Insurance**
+Use case: Digital Lending
 
-## Two Personas
+> Philippine digital lending grew 45% in 2023 — Snowflake builds applicant 360 profiles with Dynamic Tables, scores creditworthiness with ML.CLASSIFICATION, and enables real-time lending decisions at scale.
 
-| Persona | Role | Tool | What they care about |
-|---|---|---|---|
-| **Victoria Isabel Zobel-Ayala** | Head of Consumer Lending | React App (SPCS) | Portfolio quality, approval rates, time-to-decision, NPL ratios, regulatory capital |
-| **Benedict Luis Sy Jr.** | Credit Risk Modeler | Amazon QuickSight | Model accuracy, score calibration, feature drift, segment performance, bias monitoring |
+## Why Snowflake
 
----
+Snowflake consolidates applicant data into Dynamic Table 360 views, scores credit risk with ML.CLASSIFICATION replacing SageMaker, and provides end-to-end lending intelligence from application to disbursement
 
-## What's Built
+- **Dynamic Tables for applicant 360** - Real-time unified profile from 4 data sources — always fresh, no ETL
+- **ML.CLASSIFICATION for credit scoring** - Native credit model replacing SageMaker — SQL-based, no ML ops
+- **AI_CLASSIFY on bank statements** - Automatic transaction categorization reveals true income/expenses
+- **Collection priority scoring** - Second ML model for delinquent account prioritization
+- **Philippine digital lending context** - GCash/Maya era with CIC bureau data and BSP requirements
 
-| Layer | Component | Detail |
+## What is deployed
+
+| | |
+|---|---|
+| Database | `PH_BANKING_LENDING` |
+| Service | `PH_BANKING_LENDING_APP` |
+| Compute pool | `SEA_DEMOS_PHILIPPINES_POOL` |
+| Dimension table | `RAW.COLLECTIONS` (20 rows) |
+| Fact table | `RAW.BANK_STATEMENTS` (250,000 rows, 90 days) |
+| Curated layer | `CURATED.PERFORMANCE_SUMMARY`, `CURATED.TREND_ANALYSIS`, `CURATED.KPI_SUMMARY` |
+| Currency | PHP (₱) |
+
+Regions in play: Metro Manila, Cebu, Davao, Pampanga, Iloilo
+Segments: Salary Loan, SME Loan, Motorcycle Loan, Credit Card
+
+Dynamic tables are created suspended and refreshed on demand:
+
+```bash
+./refresh_demo_data.sh PH_BANKING_LENDING
+```
+
+## KPI cards
+
+Every card below is served live from `CURATED.KPI_SUMMARY`. The app keeps the
+original literal as a fallback, so it still renders if Snowflake is unreachable.
+
+| Card | Value | Backed by |
 |---|---|---|
-| **RAW** | 6 tables | APPLICATIONS (450000), BUREAU_DATA (380000), BANK_STATEMENTS (1200000), LOAN_PORTFOLIO (285000), COLLECTIONS (42000), EMPLOYER_DATA (85000) |
-| **CURATED** | 4 Dynamic Tables | APPLICANT_360, PORTFOLIO_HEALTH, CREDIT_FEATURES, DECISION_METRICS |
-| **ML** | ML.CLASSIFICATION + ML.CLASSIFICATION | Forecasting + anomaly detection |
-| **AI** | COMPLETE, AI_CLASSIFY | Classification + extraction |
-| **Search** | Cortex Search | 85000 documents indexed |
-| **Agent** | LENDING_INTELLIGENCE_AGENT | Semantic View + Search tools |
+| Loan Portfolio | `₱284B` | total across Collections |
+| NPL Ratio | `3.2%` | average per event |
+| Disbursements (MTD) | `₱12.4B` | total across Collections |
+| Borrowers Active | `1.8M` | total across Collections |
+| Expected Loss | `₱4.8B` | total across Collections |
+| Migration to Stage 2 | `+2.4%` | average per event |
+| Collection Rate | `94%` | average per event |
 
 
----
+## Demo flow
 
-## The Story
+1. Executive Cockpit
+2. Credit Decisioning
+3. Portfolio Health
+4. Ask AI
+5. Architecture & Data
 
-Philippine digital lending exploded in 2023 — growing 45% as GCash, Maya, and online banks made borrowing accessible. A Philippine universal bank processes 450,000 applications annually but struggles with fragmented data: credit bureau in one system, bank statements in another, employment verification in a third. Snowflake's Dynamic Tables build applicant 360 profiles in real-time, enabling ML-powered credit decisions in 4 hours instead of 3 days.
+## Talking points
 
----
+- **₱48B** - total lending portfolio
+- **450,000** - loan applications processed annually
+- **4.2 hours** - average time-to-decision for digital applications
+- **3.8%** - overall NPL ratio (below 5% threshold)
+- **0.48 KS** - credit scoring model discrimination power
+- **68%** - digital channel approval rate
 
-## Script
+## Business impact
 
-### [0:00–0:45] EXECUTIVE COCKPIT
-
-**Show**: Executive Cockpit tab
-
-> "₱48 billion total lending portfolio — 285,000 active loans across personal, auto, and home."
-
-**Action**: Point at ₱48B portfolio KPI
-
-### [0:45–1:30] CREDIT DECISIONING
-
-**Show**: Credit Decisioning tab
-
-> "ML.CLASSIFICATION trained on 285K historical loans — KS statistic 0.48 (strong model)."
-
-**Action**: Show model performance metrics (KS, AUC, Gini)
-
-### [1:30–2:15] PORTFOLIO HEALTH
-
-**Show**: Portfolio Health tab
-
-> "Vintage analysis: Q1 2024 cohort performing worst — approval criteria too loose during campaign."
-
-**Action**: Show vintage analysis chart
-
-### [2:15–3:00] ASK AI
-
-**Show**: Ask AI tab
-
-> "Victoria asks: 'What's driving the NPL increase in personal loans?'"
-
-**Action**: Type: 'What is driving personal loan NPL increase?'
-
-### [3:00–3:45] ARCHITECTURE & DATA
-
-**Show**: Architecture & Data tab
-
-> "Multi-source data → Dynamic Tables (applicant 360) → ML.CLASSIFICATION → real-time decisions."
-
-**Action**: Walk through architecture diagram
-
+- Philippine digital lending grew 45% in 2023 driven by fintech and online banks (BSP)
+- AI-powered credit scoring improves lending decisions by 20-30% vs traditional scorecards (McKinsey Banking)
+- Real-time data integration reduces time-to-decision by 70-90% (Accenture Banking)
+- Philippine banking NPL ratio was 3.4% in 2023 — digital lenders averaging 4-6% (BSP)
 
 ---
-
-## Key Demo Differentiators
-
-1. **Dynamic Tables for applicant 360** — Real-time unified profile from 4 data sources — always fresh, no ETL
-2. **ML.CLASSIFICATION for credit scoring** — Native credit model replacing SageMaker — SQL-based, no ML ops
-3. **AI_CLASSIFY on bank statements** — Automatic transaction categorization reveals true income/expenses
-4. **Collection priority scoring** — Second ML model for delinquent account prioritization
-5. **Philippine digital lending context** — GCash/Maya era with CIC bureau data and BSP requirements
-
-
----
-
-## Demo Prep Checklist
-
-### Data Verification
-- [ ] `SELECT COUNT(*) FROM DIGITAL_LENDING.RAW.APPLICATIONS` → 450000
-- [ ] `SELECT COUNT(*) FROM DIGITAL_LENDING.RAW.BANK_STATEMENTS` → 1200000
-- [ ] `SELECT COUNT(*) FROM DIGITAL_LENDING.CURATED.APPLICANT_360` → 450000
-
-### ML Model Verification
-- [ ] `SELECT COUNT(*) FROM DIGITAL_LENDING.ML.CREDIT_SCORER_RESULTS` → >0
-- [ ] `SELECT COUNT(*) FROM DIGITAL_LENDING.ML.COLLECTION_PRIORITY_RESULTS` → 42000
-
-### AI/Agent Verification
-- [ ] `SELECT COUNT(*) FROM DIGITAL_LENDING.AI.BANK_STATEMENT_CLASSIFICATION` → 1200000
-
+Generated from `generator/demo_specs/aws-philippines-banking-lending.json`. Do not hand-edit: run
+`python3 generator/gen_repo_docs.py aws-philippines-banking-lending` instead.
