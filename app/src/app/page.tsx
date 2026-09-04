@@ -54,6 +54,7 @@ export default function HomePage() {
         <div className="lg:col-span-1">
           <GeoMap
             country="philippines"
+            labels={{ entity: 'Segments', event: 'Bank Statements', alert: 'Defaults' }}
             regions={data?.regions}
             markers={[{"label": "Manila", "value": "HQ: 247 branches", "color": "blue", "size": "lg"}, {"label": "Cebu", "value": "Visayas: 84 branches", "color": "green", "size": "md"}, {"label": "Davao", "value": "Mindanao: 42 branches", "color": "green", "size": "md"}, {"label": "Baguio", "value": "N.Luzon: 28 branches", "color": "amber", "size": "sm"}]}
             routes={[]}
@@ -84,8 +85,13 @@ export default function HomePage() {
         columns={[
           { key: 'id', header: '#' },
           { key: 'name', header: 'Segment' },
+          { key: 'region', header: 'Region' },
           { key: 'status', header: 'Risk Level' },
-          { key: 'value', header: 'Portfolio (₱B)' },
+          { key: 'm1', header: 'Portfolio (₱B)' },
+          { key: 'm2', header: 'Migration to Stage 2' },
+          { key: 'm3', header: 'Collection Rate' },
+          { key: 'events', header: 'Bank Statements' },
+          { key: 'alerts', header: 'Defaults' },
         ]}
         data={data?.entities || []}
         title="Segment Performance"
